@@ -18,7 +18,7 @@ and actually version control their basic set ups. Let's go!
 Quickstart
 ----------
 
-Clone repository and install provider:
+Clone repository and install provider::
 
     git clone https://github.com/coxley/vagrant-vsphere-yaml
     vagrant plugin install vagrant-vsphere
