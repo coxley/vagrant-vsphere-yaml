@@ -137,6 +137,15 @@ Check out ``example/puppet/Puppetfile`` for all that's needed.
 ``vagrant-vsphere`` doesn't have a way that I'm pleased with to configure
 static networking, so please see the example for how I'm configuring that.
 
+VM Requirements
+---------------
+
+For everything to work nicely, there are a few requirements for your template.
+
+Check the vagrant user and SSH sections of the `docs`_ and make sure the 
+``open-vm-tools`` package is installed. This will ensure vagrant has no trouble
+provisioning.
+
 Acknowledgements
 ----------------
 
