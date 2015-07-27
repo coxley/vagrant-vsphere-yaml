@@ -128,3 +128,11 @@ Check out ``example/puppet/Puppetfile`` for all that's needed.
 
 ``vagrant-vsphere`` doesn't have a way that I'm pleased with to configure
 static networking, so please see the example for how I'm configuring that.
+
+Acknowledgements
+----------------
+
+Thanks goes to authors of vagrant-vsphere for writing the provider and also to
+scottlowe for writing `this`_ blog post, giving me the idea to write this.
+
+.. _this: http://blog.scottlowe.org/2014/10/22/multi-machine-vagrant-with-yaml/
