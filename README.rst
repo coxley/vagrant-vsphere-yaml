@@ -1,6 +1,11 @@
 vagrant-vsphere-yaml
 ====================
 
+.. image:: http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-2.png
+   :target: http://www.wtfpl.net/
+   :alt: Do what the fuck you want
+   :height: 25px
+
 YAML-powered "box" for the vsphere provider in Vagrant.
 
 I'm terrible at ruby so I wrote this with the goal of mananging my virtual
