@@ -1,0 +1,26 @@
+# vi: set ts=2 softtabstop=2 expandtab shiftwidth=2:
+---
+defaults: &defaults
+  mem: 512
+  cpu: 1
+
+trusty: &trusty
+  <<: *defaults
+  clone_from_vm: true
+  template_name: trusty
+  spec: vagrant0
+  provision: puppet
+
+vcenter:
+  host: vcenter.example.com
+  user: root
+  password: sekrit
+  insecure: false
+
+hosts:
+  - name: web01
+    <<: *trusty
+  - name: web02
+    <<: *trusty
+  - name: web03
+    <<: *trusty

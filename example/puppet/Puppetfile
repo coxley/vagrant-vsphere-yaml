@@ -1,0 +1,9 @@
+forge "https://forge.puppetlabs.com"
+
+mod 'puppetlabs/stdlib'
+mod 'puppetlabs/concat', "1.2.4"
+
+mod 'stdmod/stdmod',
+  :git => 'git://github.com/stdmod/stdmod.git'
+
+mod 'example42/network'
