@@ -12,6 +12,9 @@ I'm terrible at ruby so I wrote this with the goal of mananging my virtual
 machines in VMware ESXi without ever touching the Vagrantfile again. It does a
 pretty good job, too. 
 
+With this you can avoid using the vSphere web client just to add/restart VMs
+and actually version control their basic set ups. Let's go!
+
 Quickstart
 ----------
 
