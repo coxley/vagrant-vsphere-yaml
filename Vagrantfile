@@ -57,7 +57,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Enter specific host setup
     config.vm.define host['name'] do |srv|
 
-      srv.vm.box = 'vsphere_connect'
+      srv.vm.box = 'dummy'
+      srv.vm.box_url = './dummy_box/dummy.box'
       srv.vm.hostname = host['name']
 
       # Enter vsphere setup for new host
@@ -157,9 +158,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         if host['provision'] == 'puppet'
           config.librarian_puppet.puppetfile_dir = 'puppet'
           srv.vm.provision 'puppet' do |puppet|
-            puppet.manifests_path = 'puppet/manifests'
-            puppet.manifest_file = "#{host['name']}.pp"
-            # puppet.manifest_file = "default.pp"
+            puppet.manifests_path = 'puppet'
+            # puppet.manifest_file = "#{host['name']}.pp"
+            puppet.manifest_file = "manifests"
             puppet.module_path = 'puppet/modules'
             puppet.facter = {
               'vagrant' => '1'
