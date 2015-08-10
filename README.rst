@@ -90,7 +90,8 @@ In addition to the provider's options, I've presented some custom ones:
   "#{host['option']}"
 
 * ``provision``: if set to ``puppet``, will use puppet to provision and will
-  look for ``puppet/manifests/[name].pp``
+  look for ``puppet/manifests/[name].pp``. ``vm_name`` is passed as a custom
+  facter.
 
 * ``hiera``: path to hiera config file if you wish to use it with puppet
 

@@ -160,6 +160,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             vsphere.mem_reservation = host['mem_reservation']
         end
 
+        # Allow for a bootstrap shell script passed via YAML
+        if host.has_key?('bootstrap')
+          srv.vm.provision :shell,
+            :path => host['bootstrap'],
+            :args => host['bootstrap_args']
+        end
+
         if host['provision'] == 'puppet'
           config.librarian_puppet.puppetfile_dir = 'puppet'
           srv.vm.provision 'puppet' do |puppet|
@@ -168,20 +175,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
             # puppet.manifest_file = "manifests"
             puppet.module_path = 'puppet/modules'
             puppet.facter = {
-              'vagrant' => '1'
+              'vagrant' => '1',
+              'vm_name' => "#{host['name']}"
             }
             if host.has_key?('hiera')
               puppet.hiera_config_path = host['hiera']
               puppet.working_directory = '/tmp/vagrant-puppet'
             end
           end
-        end
-
-        # Allow for a bootstrap shell script passed via YAML
-        if host.has_key?('bootstrap')
-          srv.vm.provision :shell,
-            :path => host['bootstrap'],
-            :args => host['bootstrap_args']
         end
 
       end
