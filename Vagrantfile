@@ -60,6 +60,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       srv.vm.box = 'dummy'
       srv.vm.box_url = './dummy_box/dummy.box'
       srv.vm.hostname = host['name']
+      # Don't try to set IP if not provided. If provided, spec must be too
+      if host.has_key?('ipaddr')
+        srv.vm.network 'private_network', 
+          ip: host['ipaddr']
+      end
 
       # Enter vsphere setup for new host
       srv.vm.provider :vsphere do |vsphere|
@@ -158,9 +163,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         if host['provision'] == 'puppet'
           config.librarian_puppet.puppetfile_dir = 'puppet'
           srv.vm.provision 'puppet' do |puppet|
-            puppet.manifests_path = 'puppet'
-            # puppet.manifest_file = "#{host['name']}.pp"
-            puppet.manifest_file = "manifests"
+            puppet.manifests_path = 'puppet/manifests'
+            puppet.manifest_file = "#{host['name']}.pp"
+            # puppet.manifest_file = "manifests"
             puppet.module_path = 'puppet/modules'
             puppet.facter = {
               'vagrant' => '1'
@@ -172,20 +177,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
           end
         end
 
-        # Don't try to set IP if not provided. If provided, spec must be too
-        if host.has_key?('ipaddr')
-          gateway = host['gateway']
-          srv.vm.network 'private_network', 
-            ip: host['ipaddr']
-          srv.vm.provision 'shell',
-            run: 'always',
-            inline: "ip route delete default 2>&1 > /dev/null || true; ip route add default via #{gateway}"
-        end
-
         # Allow for a bootstrap shell script passed via YAML
         if host.has_key?('bootstrap')
           srv.vm.provision :shell,
-            :path => host['bootstrap']
+            :path => host['bootstrap'],
+            :args => host['bootstrap_args']
         end
 
       end

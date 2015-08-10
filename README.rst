@@ -85,6 +85,10 @@ In addition to the provider's options, I've presented some custom ones:
 
 * ``bootstrap``: path to shell script to run on host during provisioning
 
+* ``bootstrap_args``: string to pass as argument to shell bootstrap. Can use
+  normal ruby string formatting. To access host options set in yaml, use
+  "#{host['option']}"
+
 * ``provision``: if set to ``puppet``, will use puppet to provision and will
   look for ``puppet/manifests/[name].pp``
 
@@ -120,6 +124,8 @@ See the following example:
 
     hosts:
       - name: ns1
+        bootstrap: bin/ns1.sh
+        bootstrap_args: "#{host['name']}"
         <<: *trusty
       - name: web01
         <<: *trusty
